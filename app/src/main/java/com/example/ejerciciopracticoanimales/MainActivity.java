@@ -22,26 +22,37 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvAlimentos;
     private AlimentosAdapter adapterAlimentos;
     private Button  btnCarrito;
-    private Button btnAgregar;
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         btnCarrito = (Button) findViewById(R.id.btnCarrito) ;
         btnCarrito.setBackgroundColor(Color.parseColor("#36b336"));
-        btnCarrito.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"adfasdfasf",Toast.LENGTH_LONG).show());
+
         rcvAlimentos = findViewById(R.id.rcvLista);
         rcvAlimentos.setLayoutManager(new LinearLayoutManager(this));
-
-        adapterAlimentos = new AlimentosAdapter(obtenerAnimales());
+        btnCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCarrito(v);
+            }
+        });
+        adapterAlimentos = new AlimentosAdapter((ArrayList<AlimentosModelo>) obtenerAnimales());
         rcvAlimentos.setAdapter(adapterAlimentos);
 
 
     }
-
+    public void showCarrito(View v) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentPedigree carrito = new FragmentPedigree();
+        transaction.add(R.id.frlContenedor,carrito);
+        transaction.commit();
+    }
 
     public List<AlimentosModelo> obtenerAnimales() {
         List<AlimentosModelo> animales = new ArrayList<>();

@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +26,9 @@ public class FragmentPedigree extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<CarritoModel> carritoModel = new ArrayList<CarritoModel>();
+
 
     public FragmentPedigree() {
         // Required empty public constructor
@@ -49,6 +55,7 @@ public class FragmentPedigree extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -58,7 +65,12 @@ public class FragmentPedigree extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+
+        View view = inflater.inflate(R.layout.fragment_pedigree, null);
+        final TextView txtData =  (TextView)view.findViewById(R.id.txtContenido);
+        txtData.setText("askdfjhasdlkfj");
         return inflater.inflate(R.layout.fragment_pedigree, container, false);
     }
 }

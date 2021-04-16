@@ -20,6 +20,8 @@ import java.util.List;
 public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.ViewHolder> implements View.OnClickListener
 {
 
+
+    public ArrayList<AlimentosModelo> listaAlimentos;
     private View.OnClickListener listener;
     @Override
     public void onClick(View v) {
@@ -30,12 +32,16 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        public double artPrecio;
+        public String articulo;
         private TextView titulo, historia, precio;
         ImageView fotoPortada;
         Button btnAgregar;
+
         private Context context;
         public ViewHolder(View itemView, ViewGroup parent) {
             super(itemView);
+             ArrayList<CarritoModel> carritoModel = new ArrayList<CarritoModel>();
             fotoPortada = itemView.findViewById(R.id.imvAlimentos);
             titulo = itemView.findViewById(R.id.txvTitulo);
             historia = itemView.findViewById(R.id.txvHistoria);
@@ -45,14 +51,15 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
             itemView.findViewById(R.id.btnComprar).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, itemView.findViewById(R.id.txvPrecio).toString(),Toast.LENGTH_SHORT).show();
+                    carritoModel.add(new CarritoModel(articulo,artPrecio));
+
+                    Toast.makeText(parent.getContext(), "Articulo agregado al carrito",Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
-    public List<AlimentosModelo> listaAlimentos;
 
-    public AlimentosAdapter(List<AlimentosModelo>listaAlimentos){
+    public AlimentosAdapter(ArrayList<AlimentosModelo>listaAlimentos){
 
         this.listaAlimentos=listaAlimentos;
     }
@@ -75,7 +82,8 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
         holder.titulo.setText(listaAlimentos.get(position).getTitulo());
         holder.historia.setText(listaAlimentos.get(position).getHistoria());
         holder.precio.setText("Precio: $"+ listaAlimentos.get(position).getPrecio());
-
+        holder.articulo = listaAlimentos.get(position).getTitulo();
+        holder.artPrecio = listaAlimentos.get(position).getPrecio();
 
     }
 
