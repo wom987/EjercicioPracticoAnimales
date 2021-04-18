@@ -41,6 +41,7 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
         private Context context;
         public ViewHolder(View itemView, ViewGroup parent) {
             super(itemView);
+            ComprasDB objDb = new ComprasDB(itemView.getContext());
              ArrayList<CarritoModel> carritoModel = new ArrayList<CarritoModel>();
             fotoPortada = itemView.findViewById(R.id.imvAlimentos);
             titulo = itemView.findViewById(R.id.txvTitulo);
@@ -51,7 +52,8 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
             itemView.findViewById(R.id.btnComprar).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    carritoModel.add(new CarritoModel(articulo,artPrecio));
+
+                    objDb.agregar(titulo.toString(),Double.parseDouble(precio.toString()));
 
                     Toast.makeText(parent.getContext(), "Articulo agregado al carrito",Toast.LENGTH_SHORT).show();
                 }
