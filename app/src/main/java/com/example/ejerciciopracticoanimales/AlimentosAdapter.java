@@ -42,7 +42,6 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
         public ViewHolder(View itemView, ViewGroup parent) {
             super(itemView);
             ComprasDB objDb = new ComprasDB(itemView.getContext());
-             ArrayList<CarritoModel> carritoModel = new ArrayList<CarritoModel>();
             fotoPortada = itemView.findViewById(R.id.imvAlimentos);
             titulo = itemView.findViewById(R.id.txvTitulo);
             historia = itemView.findViewById(R.id.txvHistoria);
